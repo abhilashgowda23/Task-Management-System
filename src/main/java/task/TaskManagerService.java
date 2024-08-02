@@ -143,10 +143,13 @@ public class TaskManagerService {
         userList.stream().sorted(Comparator.comparing(User::getId)).forEach(s -> System.out.println("ID=" + s.getId() + ", Name=" + s.getName() + ", Email=" + s.getEmail()));
     }
 
-    public void showTasksAndUsers() {
-        userTasks.values().stream().flatMap(List::stream).forEach(task ->
-                System.out.println("ID=" + task.getAssignedUser().getId() + ", Name=" + task.getAssignedUser().getName() + ", Email=" + task.getAssignedUser().getEmail()+", [ Task Title="+task.getTitle() + ", Task Description=" + task.getDescription()+" ]"));
+       public void showTasksAndUsers() {
+
+        userTasks.values().stream().flatMap(List::stream).forEach(
+                task ->
+                        System.out.println("Name=" + task.getAssignedUser().getName() + ", Email=" + task.getAssignedUser().getEmail() + ", [ Task Title=" + task.getTitle() + ", Task Description=" + task.getDescription() + " ]"));
     }
+
 }
 
 
