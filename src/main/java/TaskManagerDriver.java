@@ -51,15 +51,22 @@ public class TaskManagerDriver {
         System.out.println("\nUsers and Tasks Details Co-Relation\n");
         taskManagerService.showTasksAndUsers();
 
+        //Count tasks
+        System.out.println("\n=>>>Count tasks");
+        taskManagerService.countTasksPerUser("USER2");
+
+        System.out.println("\n=>>> Total tasks Each User");
+        taskManagerService.countTasksPerUserMethod();
+
         //update task
         task2.setDescription("Testing in QA Server and E1");
         taskManagerService.updateTask(task2);
-        System.out.println("\nUpdated details");
+        System.out.println("\n=>>Updated details");
         System.out.println("User name =" + task2.getAssignedUser().getName() + ", Task Title=" + task2.getTitle() + ", Task Description=" + task2.getDescription() + " ]\n");
 
         //search task
         List<Task> searchedTasks = taskManagerService.searchTasks("Dev");
-        System.out.println("=>>> Searched Tasks \n");
+        System.out.println("=>>> Searched Tasks");
         for (Task task : searchedTasks) {
             System.out.println("User name =" + task.getAssignedUser().getName() + ", Task Title=" + task.getTitle() + ", Task Description=" + task.getDescription() + " ]");
         }
@@ -84,6 +91,7 @@ public class TaskManagerDriver {
         for (Task historyTask : historyTasks) {
             System.out.println("User name =" + historyTask.getAssignedUser().getName() + ", Task Title=" + historyTask.getTitle() + ", Task Priority=" + historyTask.getPriority() + ", Task Description=" + historyTask.getDescription() + " ]");
         }
+
 
 
     }
