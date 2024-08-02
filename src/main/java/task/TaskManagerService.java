@@ -158,9 +158,12 @@ public class TaskManagerService {
     }
 
 
-    public void countTasksPerUserMethod() {
+  public void countTasksPerUserMethod() {
+        System.out.println("USERS----No of Tasks");
+        System.out.println("--------------------");
         for (Map.Entry<String, List<Task>> map : userTasks.entrySet()) {
-            System.out.println(map.getKey() + " : " + map.getValue().size());
+            System.out.println(map.getKey() + "   : "+map.getValue().size());
+
         }
     }
 }
