@@ -4,8 +4,6 @@ import main.java.user.User;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 public class TaskManagerService {
 
@@ -64,14 +62,6 @@ public class TaskManagerService {
 
     public void assignTaskToUser(User user, Task task) {
         userTasks.computeIfAbsent(user.getId(), k -> new ArrayList<>()).add(task);
-
-
-    }
-    // Or 2nd way
-  public void assignTaskToUser(User user, Task task) {
-        List<Task> arrayList= userTasks.getOrDefault(user.getId(),new ArrayList<>());
-        arrayList.add(task);
-        userTasks.putIfAbsent(user.getId(),arrayList);
 
 
     }
@@ -151,13 +141,30 @@ public class TaskManagerService {
         userList.stream().sorted(Comparator.comparing(User::getId)).forEach(s -> System.out.println("ID=" + s.getId() + ", Name=" + s.getName() + ", Email=" + s.getEmail()));
     }
 
-       public void showTasksAndUsers() {
+    public void showTasksAndUsers() {
 
         userTasks.values().stream().flatMap(List::stream).forEach(
                 task ->
                         System.out.println("Name=" + task.getAssignedUser().getName() + ", Email=" + task.getAssignedUser().getEmail() + ", [ Task Title=" + task.getTitle() + ", Task Description=" + task.getDescription() + " ]"));
+
     }
 
+    public void countTasksPerUser(String id) {
+
+        long n = userTasks.values().stream().flatMap(List::stream).filter(task -> task.getAssignedUser().getId().equalsIgnoreCase(id)).count();
+         userList.stream().filter(user -> user.getId().equalsIgnoreCase(id)).forEach( l->System.out.println("Total Tasks Assigned for " + l.getName()+" " + " is/are : " + n));
+
+
+    }
+
+
+    public void countTasksPerUserMethod() {
+        for (Map.Entry<String, List<Task>> map : userTasks.entrySet()) {
+            System.out.println(map.getKey() + " : " + map.getValue().size());
+        }
+    }
 }
+
+
 
 
