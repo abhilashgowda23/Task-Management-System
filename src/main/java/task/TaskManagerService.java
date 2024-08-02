@@ -67,6 +67,14 @@ public class TaskManagerService {
 
 
     }
+    // Or 2nd way
+  public void assignTaskToUser(User user, Task task) {
+        List<Task> arrayList= userTasks.getOrDefault(user.getId(),new ArrayList<>());
+        arrayList.add(task);
+        userTasks.putIfAbsent(user.getId(),arrayList);
+
+
+    }
 
     public void updateTask(Task updatedTask) {
         Task existingTask = tasks.get(updatedTask.getId());
